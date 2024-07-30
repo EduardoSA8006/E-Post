@@ -26,7 +26,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
                 width: double.infinity,
                 height: 75,
-                color: Colors.white, //fromARGB(255, 255, 255, 255),
+                color: Colors.green, //fromARGB(255, 255, 255, 255),
                 child: Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -56,7 +56,7 @@ class _TelaLoginState extends State<TelaLogin> {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                color: Colors.white, //fromARGB(255, 255, 255, 255),
+                color: Colors.green, //fromARGB(255, 255, 255, 255),
                 padding: EdgeInsets.all(
                     16.0), // Added padding for better text alignment
                 child: Column(
@@ -84,7 +84,7 @@ class _TelaLoginState extends State<TelaLogin> {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                color: Colors.white, //fromARGB(255, 255, 255, 255),
+                color: Colors.green, //fromARGB(255, 255, 255, 255),
                 padding:
                     EdgeInsets.all(16.0), // Added padding for better alignment
                 child: Column(
@@ -128,7 +128,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
               ),
               Container(
-                color: Colors.white, //fromARGB(255, 255, 255, 255),
+                color: Colors.green, //fromARGB(255, 255, 255, 255),
                 margin: EdgeInsets.fromLTRB(16, 10, 16, 0),
                 padding: EdgeInsets.all(16.0),
                 child: Text(
@@ -143,9 +143,9 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
               ),
               Container(
-                color: Colors.white,
+                color: Colors.green,
                 margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                padding: EdgeInsets.all(0.0),
+                padding: EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 6, 45, 253),
@@ -168,8 +168,8 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
               ),
               Container(
-                color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                color: Colors.green,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
                 padding: EdgeInsets.all(16.0),
                 child: Row(
                   children: <Widget>[
@@ -199,9 +199,9 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
               ),
               Container(
-                color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                padding: EdgeInsets.all(0.0),
+                color: Colors.green,
+                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                padding: EdgeInsets.all(16.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 238, 238, 238),
@@ -235,17 +235,6 @@ class _TelaLoginState extends State<TelaLogin> {
                   onPressed: () {},
                 ),
               ),
-              Container(
-                color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                padding: EdgeInsets.all(10),
-                width: 350,
-                child: Text(
-                  'Ao clicar em continuar, você concorda com nossos Termos de Serviço e Política de Privacidade',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(color: Color.fromARGB(255, 57, 135, 252)),
-                ),
-              )
             ],
           ),
         ),
