@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class TelaLogin extends StatefulWidget {
   @override
   _TelaLoginState createState() => _TelaLoginState();
@@ -236,7 +237,11 @@ class _TelaLoginState extends State<TelaLogin> {
                 child: Text(
                   'Ao clicar em continuar, você concorda com nossos Termos de Serviço e Política de Privacidade',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Color.fromARGB(255, 57, 135, 252)),
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 57, 135, 252),
+                    decoration: TextDecoration.underline,
+                    decorationColor: Color.fromARGB(255, 9, 44, 131),
+                  ),
                 ),
               )
             ],
