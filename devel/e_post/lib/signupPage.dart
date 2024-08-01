@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: LoginPage(),
-  ));
-}
-
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -41,7 +35,8 @@ class LoginPage extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 13),
-            Text("E-mail", style: GoogleFonts.inter(color: Color.fromARGB(6,45,253,1))),
+            Text("E-mail",
+                style: GoogleFonts.inter(color: Color.fromARGB(6, 45, 253, 1))),
             const TextField(
               cursorColor: Color.fromARGB(255, 64, 115, 255),
               decoration: InputDecoration(
