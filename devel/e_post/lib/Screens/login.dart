@@ -209,9 +209,10 @@ class _TelaLoginState extends State<TelaLogin> {
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 16),
+                        padding: EdgeInsets.fromLTRB(0, 0, 5, 0),
                         child: Image.asset(
                           "assets/logoGoogle.png",
                           height: 25,
@@ -219,6 +220,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       ),
                       Text(
                         'Google',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18,
                           color: Color.fromARGB(255, 6, 45, 253),
