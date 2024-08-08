@@ -213,7 +213,7 @@ class _TelaSignupState extends State<TelaSignup> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 16),
+                        padding: EdgeInsets.only(left: 0),
                         child: Image.asset(
                           "assets/images/googleLogo.png",
                           height: 25,
