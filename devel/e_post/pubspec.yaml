@@ -14,6 +14,9 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   google_fonts: ^6.2.1
+  flutter_masked_text2: ^0.9.1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
@@ -25,4 +28,4 @@ flutter:
 
   assets:
     - assets/images/icon.png
-    - assets/images/googleLogo.png
+    - assets/images/logoGoogle.png

@@ -1,3 +1,4 @@
+import 'package:e_post/screens/telaSignUp2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,12 +15,12 @@ class _TelaSignupState extends State<TelaSignup> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
                 width: double.infinity,
                 height: 75,
                 color: Colors.white,
@@ -27,7 +28,7 @@ class _TelaSignupState extends State<TelaSignup> {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 30.0),
                         child: Text(
                           'E-Post',
@@ -38,9 +39,9 @@ class _TelaSignupState extends State<TelaSignup> {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10),
+                      const SizedBox(width: 10),
                       Padding(
-                        padding: EdgeInsets.only(right: 16.0),
+                        padding: const EdgeInsets.only(right: 16.0),
                         child: Image.asset(
                           "assets/images/icon.png",
                           height: 55,
@@ -51,9 +52,9 @@ class _TelaSignupState extends State<TelaSignup> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 color: Colors.white,
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -61,12 +62,12 @@ class _TelaSignupState extends State<TelaSignup> {
                       style: GoogleFonts.inter(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Color.fromARGB(255, 11, 28, 172),
+                        color: const Color.fromARGB(255, 11, 28, 172),
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 10),
-                    Text(
+                    const SizedBox(height: 10),
+                    const Text(
                       "Digite seu e-mail para se inscrever neste aplicativo",
                       style: TextStyle(
                         fontSize: 17,
@@ -79,7 +80,7 @@ class _TelaSignupState extends State<TelaSignup> {
               ),
               Container(
                 color: Colors.white,
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: <Widget>[
                     TextFormField(
@@ -89,15 +90,15 @@ class _TelaSignupState extends State<TelaSignup> {
                           border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15)),
                           labelText: 'Email',
-                          labelStyle: TextStyle(
+                          labelStyle: const TextStyle(
                             color: Color.fromARGB(255, 83, 131, 255),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
+                          contentPadding: const EdgeInsets.symmetric(
                             vertical: 15,
                             horizontal: 16,
                           )),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     TextFormField(
                       decoration: InputDecoration(
                         filled: true,
@@ -106,17 +107,17 @@ class _TelaSignupState extends State<TelaSignup> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         labelText: 'Crie uma Senha',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color.fromARGB(255, 83, 131, 255),
                         ),
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           vertical: 15,
                           horizontal: 16,
                         ),
                       ),
                       obscureText: true, // Hides the password text
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     TextFormField(
@@ -127,10 +128,10 @@ class _TelaSignupState extends State<TelaSignup> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         labelText: 'Confirme a senha',
-                        labelStyle: TextStyle(
+                        labelStyle: const TextStyle(
                           color: Color.fromARGB(255, 83, 131, 255),
                         ),
-                        contentPadding: EdgeInsets.symmetric(
+                        contentPadding: const EdgeInsets.symmetric(
                           vertical: 15,
                           horizontal: 16,
                         ),
@@ -142,41 +143,47 @@ class _TelaSignupState extends State<TelaSignup> {
               ),
               Container(
                 color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 6, 45, 253),
+                    backgroundColor: const Color.fromARGB(255, 6, 45, 253),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 12.0,
                       horizontal: 100.0,
                     ),
                   ),
-                  child: Text(
-                    'Inscrever-se',
+                  child: const Text(
+                    'Continuar',
                     style: TextStyle(
                       fontSize: 18,
                       color: Colors.white,
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const TelaSignup2()),
+                    );
+                  },
                 ),
               ),
               Container(
                 color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: Row(
                   children: <Widget>[
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(right: 8.0),
+                        margin: const EdgeInsets.only(right: 8.0),
                         height: 1.0,
-                        color: Color.fromARGB(255, 55, 103, 226),
+                        color: const Color.fromARGB(255, 55, 103, 226),
                       ),
                     ),
-                    Text(
+                    const Text(
                       "ou continue com o google",
                       style: TextStyle(
                         fontSize: 16,
@@ -186,41 +193,45 @@ class _TelaSignupState extends State<TelaSignup> {
                     ),
                     Expanded(
                       child: Container(
-                        margin: EdgeInsets.only(left: 8.0),
+                        margin: const EdgeInsets.only(left: 8.0),
                         height: 1.0,
-                        color: Color.fromARGB(255, 55, 103, 226),
+                        color: const Color.fromARGB(255, 55, 103, 226),
                       ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
               Container(
                 color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.fromLTRB(20, 0, 16, 0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 238, 238, 238),
+                    backgroundColor: const Color.fromARGB(255, 238, 238, 238),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    padding: EdgeInsets.symmetric(
-                      vertical: 12.0,
-                      horizontal: 140,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 13,
+                      horizontal: 118,
                     ),
                   ),
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Padding(
-                        padding: EdgeInsets.only(left: 0),
+                        padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
                         child: Image.asset(
-                          "assets/images/googleLogo.png",
+                          "assets/images/logoGoogle.png",
                           height: 25,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'Google',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18,
                           color: Color.fromARGB(255, 6, 45, 253),
@@ -233,10 +244,9 @@ class _TelaSignupState extends State<TelaSignup> {
               ),
               Container(
                 color: Colors.white,
-                margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                padding: EdgeInsets.all(10),
-                width: 350,
-                child: Text(
+                margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                padding: const EdgeInsets.all(10),
+                child: const Text(
                   'Ao clicar em continuar, você concorda com nossos Termos de Serviço e Política de Privacidade',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Color.fromARGB(255, 57, 135, 252)),
