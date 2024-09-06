@@ -4,13 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
 class TelaSignup2 extends StatefulWidget {
-  const TelaSignup2({Key? key}) : super(key: key);
+  const TelaSignup2({super.key});
 
   @override
   _TelaSignup2State createState() => _TelaSignup2State();
 }
 
 class _TelaSignup2State extends State<TelaSignup2> {
+  final _formKey = GlobalKey<FormState>();
   var dateInputController = MaskedTextController(mask: '00/00/0000');
   final phoneController = MaskedTextController(mask: '(00) 00000-0000');
 
@@ -22,7 +23,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.fromLTRB(0, 50, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 50, 0, 0),
               width: double.infinity,
               height: 100,
               color: Colors.white,
@@ -30,7 +31,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(left: 30.0, top: 50),
                       child: Text(
                         'E-Post',
@@ -41,9 +42,9 @@ class _TelaSignup2State extends State<TelaSignup2> {
                         ),
                       ),
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Padding(
-                      padding: EdgeInsets.only(right: 16.0, top: 50),
+                      padding: const EdgeInsets.only(right: 16.0, top: 50),
                       child: Image.asset(
                         "assets/images/icon.png",
                         height: 55,
@@ -54,8 +55,8 @@ class _TelaSignup2State extends State<TelaSignup2> {
               ),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(0, 20, 0, 0),
-              padding: EdgeInsets.all(10.0),
+              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
                   Text(
@@ -63,12 +64,12 @@ class _TelaSignup2State extends State<TelaSignup2> {
                     style: GoogleFonts.inter(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Color.fromARGB(255, 11, 28, 172),
+                      color: const Color.fromARGB(255, 11, 28, 172),
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 10),
-                  Text(
+                  const SizedBox(height: 10),
+                  const Text(
                     "Preencha com seu nome e data de nascimento",
                     style: TextStyle(
                       fontSize: 17,
@@ -76,10 +77,10 @@ class _TelaSignup2State extends State<TelaSignup2> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
-                  Align(
+                  const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left: 5),
@@ -92,126 +93,154 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      labelText: 'Nome completo',
-                      labelStyle: TextStyle(
-                        color: Color.fromARGB(255, 83, 131, 255),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 16,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Text(
-                        "Data de nascimento.",
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Color.fromARGB(255, 6, 43, 253),
+                  Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            readOnly: true,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Este campo é obrigatório';
+                              }
+                              return null;
+                            },
+                            decoration: InputDecoration(
+                              labelText: 'Nome completo',
+                              labelStyle: const TextStyle(
+                                color: Color.fromARGB(255, 83, 131, 255),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(13),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 16,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text(
+                                "Data de nascimento.",
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Color.fromARGB(255, 6, 43, 253),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            controller: dateInputController,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(13)),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 16,
+                              ),
+                              labelText: 'DD/MM/AAAA',
+                              labelStyle: const TextStyle(
+                                color: Color.fromARGB(255, 83, 131, 255),
+                              ),
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.calendar_today),
+                                onPressed: () => _selectDate(context),
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Por favor, preencha com uma data';
+                              }
+                              return null;
+                            },
+                            keyboardType: TextInputType.number,
+                          ),
+                          const SizedBox(height: 10),
+                          const Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 5),
+                              child: Text(
+                                "Número de telefone.",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 6, 43, 253)),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          TextFormField(
+                            readOnly: true,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Este campo é obrigatório';
+                              }
+                              return null;
+                            },
+                            controller: phoneController,
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              labelText: "(00) 00000-0000",
+                              labelStyle: const TextStyle(
+                                color: Color.fromARGB(255, 83, 131, 255),
+                              ),
+                              filled: true,
+                              fillColor: Colors.white,
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(13),
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 15,
+                                horizontal: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                  const SizedBox(height: 25),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 6, 45, 253),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 100,
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextField(
-                    controller: dateInputController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(13)),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 16,
+                      child: const Text(
+                        'Finalizar',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
-                      labelText: 'DD/MM/AAAA',
-                      labelStyle: TextStyle(
-                        color: Color.fromARGB(255, 83, 131, 255),
-                      ),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.calendar_today),
-                        onPressed: () => _selectDate(context),
-                      ),
-                    ),
-                    keyboardType: TextInputType.number,
-                  ),
-                  SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 5),
-                      child: Text(
-                        "Número de telefone.",
-                        style:
-                            TextStyle(color: Color.fromARGB(255, 6, 43, 253)),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    controller: phoneController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "(00) 00000-0000",
-                      labelStyle: TextStyle(
-                        color: Color.fromARGB(255, 83, 131, 255),
-                      ),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(
-                        vertical: 15,
-                        horizontal: 16,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 25),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(255, 6, 45, 253),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 100,
-                      ),
-                    ),
-                    child: Text(
-                      'Finalizar',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const TelaSignup()),
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: 28,
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TelaSignup()),
+                          );
+                        }
+                      }),
+                  const SizedBox(
+                    height: 20,
                   ),
                   Container(
                     color: Colors.white,
-                    margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                    padding: EdgeInsets.all(10),
+                    margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                    padding: const EdgeInsets.all(10),
                     width: 350,
-                    child: Text(
+                    child: const Text(
                       'Ao clicar em finalizar, você concorda com nossos Termos de Serviço e Política de Privacidade',
                       textAlign: TextAlign.center,
                       style:
