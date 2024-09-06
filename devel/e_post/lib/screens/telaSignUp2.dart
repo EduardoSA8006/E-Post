@@ -1,3 +1,4 @@
+import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -194,7 +195,13 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       'Finalizar',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TelaSignup()),
+                      );
+                    },
                   ),
                   SizedBox(
                     height: 28,
@@ -205,7 +212,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                     padding: EdgeInsets.all(10),
                     width: 350,
                     child: Text(
-                      'Ao clicar em continuar, você concorda com nossos Termos de Serviço e Política de Privacidade',
+                      'Ao clicar em finalizar, você concorda com nossos Termos de Serviço e Política de Privacidade',
                       textAlign: TextAlign.center,
                       style:
                           TextStyle(color: Color.fromARGB(255, 57, 135, 252)),
