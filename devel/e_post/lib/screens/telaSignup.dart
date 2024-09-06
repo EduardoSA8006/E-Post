@@ -15,6 +15,7 @@ class _TelaSignupState extends State<TelaSignup> {
   final TextEditingController _senhaController = TextEditingController();
   final TextEditingController _confirmaSenhaController =
       TextEditingController();
+  bool _mostrarSenha1 = false;
   bool _mostrarSenha = false;
 
   String? _validarEmail(String? value) {
@@ -151,6 +152,18 @@ class _TelaSignupState extends State<TelaSignup> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(15),
                             ),
+                            suffixIcon: IconButton(
+                                icon: Icon(
+                                  _mostrarSenha
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _mostrarSenha =
+                                        !_mostrarSenha; // Alterna a visibilidade da senha
+                                  });
+                                }),
                             labelText: 'Crie uma Senha',
                             labelStyle: const TextStyle(
                               color: Color.fromARGB(255, 83, 131, 255),
@@ -160,7 +173,7 @@ class _TelaSignupState extends State<TelaSignup> {
                               horizontal: 16,
                             ),
                           ),
-                          obscureText: true, // Hides the password text
+                          obscureText: !_mostrarSenha,
                         ),
                         const SizedBox(
                           height: 10,
@@ -183,6 +196,18 @@ class _TelaSignupState extends State<TelaSignup> {
                               borderRadius: BorderRadius.circular(15),
                             ),
                             labelText: 'Confirme a senha',
+                            suffixIcon: IconButton(
+                                icon: Icon(
+                                  _mostrarSenha1
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _mostrarSenha1 =
+                                        !_mostrarSenha1; // Alterna a visibilidade da senha
+                                  });
+                                }),
                             labelStyle: const TextStyle(
                               color: Color.fromARGB(255, 83, 131, 255),
                             ),
@@ -191,7 +216,7 @@ class _TelaSignupState extends State<TelaSignup> {
                               horizontal: 16,
                             ),
                           ),
-                          obscureText: true,
+                          obscureText: !_mostrarSenha1,
                         ),
                       ],
                     ),
