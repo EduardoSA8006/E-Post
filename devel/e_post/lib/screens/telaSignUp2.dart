@@ -101,7 +101,6 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       child: Column(
                         children: [
                           TextFormField(
-                            readOnly: true,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Este campo é obrigatório';
@@ -141,7 +140,6 @@ class _TelaSignup2State extends State<TelaSignup2> {
                           const SizedBox(height: 10),
                           TextFormField(
                             controller: dateInputController,
-                            readOnly: true,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(13)),
@@ -172,7 +170,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                             child: Padding(
                               padding: EdgeInsets.only(left: 5),
                               child: Text(
-                                "Número de telefone.",
+                                "Número de telefone (opcional)",
                                 style: TextStyle(
                                     color: Color.fromARGB(255, 6, 43, 253)),
                               ),
@@ -180,13 +178,6 @@ class _TelaSignup2State extends State<TelaSignup2> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
-                            readOnly: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Este campo é obrigatório';
-                              }
-                              return null;
-                            },
                             controller: phoneController,
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
