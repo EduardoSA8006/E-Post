@@ -1,6 +1,8 @@
 import 'package:e_post/screens/telaSignUp2.dart';
+import 'package:e_post/verificacoes/email.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:e_post/verificacoes/senha.dart';
 
 class TelaSignup extends StatefulWidget {
   const TelaSignup({super.key});
@@ -17,29 +19,6 @@ class _TelaSignupState extends State<TelaSignup> {
       TextEditingController();
   bool _mostrarSenha1 = false;
   bool _mostrarSenha = false;
-
-  String? _validarEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor, insira um e-mail';
-    }
-    // Expressão regular para verificar o formato do e-mail
-    final emailRegExp = RegExp(r'^[^@]+@[^@]+\.[^@]+$');
-    if (!emailRegExp.hasMatch(value)) {
-      return 'Por favor, insira um e-mail válido';
-    }
-    return null;
-  }
-
-  // Função para validar o campo de senha
-  String? _validarSenha(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Por favor, insira uma senha';
-    }
-    if (value.length < 6) {
-      return 'A senha deve ter no mínimo 6 caracteres';
-    }
-    return null;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +99,7 @@ class _TelaSignupState extends State<TelaSignup> {
                         TextFormField(
                           controller: _emailController,
                           keyboardType: TextInputType.emailAddress,
-                          validator: _validarEmail,
+                          validator: validarEmail,
                           decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -140,12 +119,7 @@ class _TelaSignupState extends State<TelaSignup> {
                         ),
                         TextFormField(
                           controller: _senhaController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor, insira uma senha';
-                            }
-                            return null;
-                          },
+                          validator: validarSenha,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
@@ -181,13 +155,8 @@ class _TelaSignupState extends State<TelaSignup> {
                         TextFormField(
                           controller: _confirmaSenhaController,
                           validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Por favor, confirme a senha';
-                            }
-                            if (value != _senhaController.text) {
-                              return 'As senhas não são iguais';
-                            }
-                            return null;
+                            return verificaConfirmeSenha(
+                                value, _senhaController.text);
                           },
                           decoration: InputDecoration(
                             filled: true,
@@ -204,8 +173,7 @@ class _TelaSignupState extends State<TelaSignup> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-                                    _mostrarSenha1 =
-                                        !_mostrarSenha1; // Alterna a visibilidade da senha
+                                    _mostrarSenha1 = !_mostrarSenha1;
                                   });
                                 }),
                             labelStyle: const TextStyle(
