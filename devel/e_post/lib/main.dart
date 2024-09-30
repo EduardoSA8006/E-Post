@@ -1,3 +1,4 @@
+import 'package:e_post/screens/home.dart';
 
 import 'screens/telaSignup.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pt', 'BR'),
       ],
-      home: const TelaSignup(),
+      home: const HomePage(),
     );
   }
 }
