@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:flutter/services.dart';
 import 'package:e_post/cards/gera_cards.dart';
 import 'package:e_post/screens/configuracoes.dart';
 import 'package:e_post/screens/notificacoes.dart';
@@ -15,11 +14,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    super.dispose();
   }
 
   @override
