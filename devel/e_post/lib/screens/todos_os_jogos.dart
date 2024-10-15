@@ -11,18 +11,28 @@ class JogosPage extends StatefulWidget {
 class _JogosPageState extends State<JogosPage> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        buildGameCard('GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
-        buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
-        buildGameCard('GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
-        buildGameCard('GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
-        buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
-        buildGameCard('GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
-        buildGameCard('GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
-        buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
-        buildGameCard('GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
-      ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Todos os jogos'),
+      ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            buildGameCard('GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
+            buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
+            buildGameCard('GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
+            buildGameCard('GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
+            buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
+            buildGameCard('GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
+            buildGameCard('GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
+            buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
+            buildGameCard('GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
+          ],
+        ),
+      ),
     );
   }
 }

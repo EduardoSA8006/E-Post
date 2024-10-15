@@ -14,6 +14,16 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: AppBar(
         title: Text('Configurações'),
       ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        width: double.infinity,
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [Text('ola')],
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/services.dart';
-import 'package:e_post/cards/gera_cards.dart';
 import 'package:e_post/screens/configuracoes.dart';
 import 'package:e_post/screens/notificacoes.dart';
 import 'package:e_post/screens/todos_os_jogos.dart';
@@ -14,6 +13,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? selectedValue;
+  final List<String> items = ['Futebol', 'Basquete', 'Voleibol'];
+
   void _onItemTapped(int index) {
     setState(() {});
   }
@@ -60,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.chat)),
             IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -97,6 +100,7 @@ class _HomePageState extends State<HomePage> {
                 height: 20,
               ),
               Container(
+                  height: 35,
                   alignment: Alignment.center,
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -117,23 +121,35 @@ class _HomePageState extends State<HomePage> {
                 height: 7,
               ),
               Container(
-                alignment: Alignment.center,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: const Color.fromARGB(255, 83, 131, 255),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(4),
-                  child: Text(
-                    'Futebol',
-                    style: GoogleFonts.inter(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold),
+                  height: 35,
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(18),
+                    color: const Color.fromARGB(255, 83, 131, 255),
                   ),
-                ),
-              ),
+                  child: DropdownButton<String>(
+                    value: selectedValue,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedValue = newValue;
+                      });
+                    },
+                    items: items.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      );
+                    }).toList(),
+                    underline: SizedBox.shrink(),
+                    icon: Icon(Icons.arrow_drop_down, color: Colors.white),
+                  )),
               SizedBox(
                 height: 10,
               ),
@@ -166,76 +182,60 @@ class _HomePageState extends State<HomePage> {
                 height: 20,
               ),
               Container(
-                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 83, 131, 255),
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(3),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Resultado dos jogos',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        InkWell(
-                          child: Row(
-                            children: [
-                              Text(
-                                'ver todos',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Colors.white,
-                              )
-                            ],
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => JogosPage(),
-                              ),
-                            );
-                          },
-                        )
-                      ],
-                    ),
-                  )),
-              SizedBox(
-                height: 8,
-              ),
-              SizedBox(
-                height: 200,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: <Widget>[
-                    buildGameCard(
-                        'GRUPO A', 'Qatar', 'Ecuador', 1, 2, '14 Nov'),
-                    buildGameCard('GRUPO B', 'England', 'Iran', 4, 2, '1 Nov'),
-                    buildGameCard(
-                        'GRUPO C', 'Argentina', 'Mexico', 3, 0, '3 Nov'),
-                    // Adicione mais cards conforme necessário
-                  ],
+                width: double.infinity,
+                padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 83, 131, 255),
+                  borderRadius: BorderRadius.circular(12),
                 ),
+                child: Container(
+                    height: 30,
+                    padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 83, 131, 255),
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(3),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Locais em destaque',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          InkWell(
+                            child: Row(
+                              children: [
+                                Text(
+                                  'ver todos',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward_ios_rounded,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => JogosPage(),
+                                ),
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    )),
               ),
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          shape: CircleBorder(),
-          onPressed: () {},
-          child: Icon(Icons.add),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-        ),
-        floatingActionButtonLocation: CustomFloatingActionButtonLocation(50),
         bottomNavigationBar: BottomAppBar(
           height: 70,
           notchMargin: 10.0,
@@ -251,7 +251,17 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.map, color: Colors.white),
                 onPressed: () => _onItemTapped(1),
               ),
-              SizedBox(width: 40), // Espaço para o FloatingActionButton
+              RawMaterialButton(
+                elevation: 2,
+                fillColor: Colors.white,
+                padding: EdgeInsets.all(11),
+                onPressed: () {},
+                shape: CircleBorder(),
+                child: Icon(
+                  Icons.add,
+                  size: 25,
+                ),
+              ),
               IconButton(
                 icon: Icon(Icons.sports_soccer, color: Colors.white),
                 onPressed: () => _onItemTapped(2),
@@ -263,24 +273,5 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ));
-  }
-}
-
-class CustomFloatingActionButtonLocation extends FloatingActionButtonLocation {
-  final double offsetY;
-
-  CustomFloatingActionButtonLocation(this.offsetY);
-
-  @override
-  Offset getOffset(ScaffoldPrelayoutGeometry scaffoldGeometry) {
-    final double fabX = (scaffoldGeometry.scaffoldSize.width -
-            scaffoldGeometry.floatingActionButtonSize.width) /
-        2;
-    final double fabY = scaffoldGeometry.scaffoldSize.height -
-        scaffoldGeometry.floatingActionButtonSize.height -
-        56 +
-        offsetY;
-
-    return Offset(fabX, fabY);
   }
 }
