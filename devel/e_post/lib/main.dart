@@ -1,8 +1,11 @@
+import 'package:e_post/Screens/perfil.dart';
+import 'package:e_post/Screens/perfileditavel.dart';
 import 'package:e_post/screens/home.dart';
 
 import 'screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'Screens/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +31,7 @@ class MyApp extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pt', 'BR'),
       ],
-      home: const HomePage(),
+      home: PerfilEditavel(),
     );
   }
 }

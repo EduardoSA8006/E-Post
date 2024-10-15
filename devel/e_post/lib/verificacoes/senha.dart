@@ -20,7 +20,7 @@ String? validarSenha(String? value) {
     print(value);
     return 'A senha deve ter no mínimo 6 caracteres';
   }
-  if (verificaForcaSenha(value) <= 3) {
+  if (verificaForcaSenha(value) <= 2) {
     return "A senha deve ser uma combinação de letras, números e caracteres";
   }
   return null;

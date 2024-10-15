@@ -1,3 +1,4 @@
+import 'package:e_post/Screens/home.dart';
 import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -200,29 +201,31 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       )),
                   const SizedBox(height: 25),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 6, 45, 253),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 100,
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 6, 45, 253),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      child: const Text(
-                        'Finalizar',
-                        style: TextStyle(fontSize: 18, color: Colors.white),
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 100,
                       ),
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const TelaSignup()),
-                          );
-                        }
-                      }),
+                    ),
+                    child: const Text(
+                      'Finalizar',
+                      style: TextStyle(fontSize: 18, color: Colors.white),
+                    ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePage()),
+                        );
+                      }
+                    },
+                  ),
                   const SizedBox(
                     height: 20,
                   ),

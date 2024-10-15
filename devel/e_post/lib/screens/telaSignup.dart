@@ -216,6 +216,7 @@ class _TelaSignupState extends State<TelaSignup> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     // Se o formulário for válido, mostre uma mensagem de sucesso
+                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
