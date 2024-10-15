@@ -14,6 +14,16 @@ class _NotoficationPageState extends State<NotoficationPage> {
       appBar: AppBar(
         title: Text('Notificações'),
       ),
+      body: Container(
+        padding: EdgeInsets.all(20),
+        width: double.infinity,
+        height: double.infinity,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [Text('ola')],
+          ),
+        ),
+      ),
     );
   }
 }
