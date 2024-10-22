@@ -1,3 +1,4 @@
+import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/home.dart';
 import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class TelaSignup2 extends StatefulWidget {
 
 class _TelaSignup2State extends State<TelaSignup2> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController completeName = TextEditingController();
   var dateInputController = MaskedTextController(mask: '00/00/0000');
   final phoneController = MaskedTextController(mask: '(00) 00000-0000');
 
@@ -102,6 +104,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       child: Column(
                         children: [
                           TextFormField(
+                            controller: completeName,
                             validator: (value) {
                               if (value == null || value.isEmpty) {
                                 return 'Este campo é obrigatório';
@@ -215,8 +218,15 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       'Finalizar',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        dados["name"] = completeName.text;
+                        dados["data_nascimento"] =
+                            dateInputController.text.replaceAll('/', '-');
+                        dados["telefone"] = (phoneController.text.isNotEmpty)
+                            ? phoneController.text
+                            : null;
+                        await submitForm();
                         Navigator.pop(context);
                         Navigator.push(
                           context,

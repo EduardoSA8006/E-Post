@@ -1,6 +1,7 @@
 import 'package:e_post/Screens/perfil.dart';
 import 'package:e_post/Screens/perfileditavel.dart';
 import 'package:e_post/screens/home.dart';
+import 'package:e_post/screens/telaSignUp2.dart';
 
 import 'screens/telaSignup.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pt', 'BR'),
       ],
-      home: PerfilEditavel(),
+      home: TelaLogin(),
     );
   }
 }
