@@ -18,6 +18,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   http: ^1.2.2
+  google_maps_flutter: ^2.9.0
 
 dev_dependencies:
   flutter_test:
