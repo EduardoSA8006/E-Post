@@ -1,4 +1,4 @@
-import 'package:e_post/cards/gera_cards.dart';
+import 'package:e_post/screens/functionsScreens/cards/gera_cards.dart';
 import 'package:flutter/material.dart';
 
 class JogosPage extends StatefulWidget {
