@@ -1,3 +1,4 @@
+import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/screens/telaSignUp2.dart';
 import 'package:e_post/verificacoes/email.dart';
 import 'package:flutter/material.dart';
@@ -215,7 +216,9 @@ class _TelaSignupState extends State<TelaSignup> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    // Se o formulário for válido, mostre uma mensagem de sucesso
+                    dados["email"] = _emailController.text;
+                    dados["senha"] = _senhaController.text;
+                    Navigator.pop(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
