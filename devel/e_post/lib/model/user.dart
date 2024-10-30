@@ -3,7 +3,7 @@ class User {
   final String name;
   final String email;
   final String senha;
-  final Date dataNascimento;
+  final DateTime dataNascimento;
   final DateTime? dataCriacao;  // Pode ser nulo ao criar um novo usuário
   final String? telefone;
   final String? fotoPerfil;

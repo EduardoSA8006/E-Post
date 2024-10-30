@@ -1,178 +1,139 @@
 import 'package:e_post/Screens/perfileditavel.dart';
+import 'package:e_post/database/db_helper.dart';
+import 'package:e_post/model/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:e_post/Screens/telaSignUp2.dart';
+import 'package:e_post/Screens/home.dart';
 
 class Perfil extends StatefulWidget {
-  const Perfil({super.key});
+  final int? idUser; // Recebe o ID do usuário logado
+
+  const Perfil({Key? key, required this.idUser}) : super(key: key);
 
   @override
   State<Perfil> createState() => _PerfilState();
 }
 
 class _PerfilState extends State<Perfil> {
+  late Future<User?> userFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    userFuture = DBHelper.instance.fetchUserById(idUser!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          SizedBox(
-            height: 50,
-          ),
-          Container(
-            alignment: Alignment.center,
-            //color: Colors.blue,
-            height: 225,
-            width: double.infinity,
-            child: Stack(
-              children: [
-                CircleAvatar(
-                  radius: 100,
-                  backgroundImage: AssetImage(
-                      'assets/images/logoGoogle.png'), //tem que trocar e pegar o caminho da imagen do banco de dados e colocar aqui pra pegar a imagem no servidor
-                ),
-                Positioned(
-                  bottom: 5,
-                  right: 5,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.blue,
+      body: FutureBuilder<User?>(
+        future: userFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator()); // Carregando
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Erro ao carregar perfil'));
+          } else if (!snapshot.hasData || snapshot.data == null) {
+            return Center(child: Text('Usuário não encontrado'));
+          }
+
+          final user = snapshot.data!;
+
+          return Column(
+            children: [
+              SizedBox(height: 50),
+              Container(
+                alignment: Alignment.center,
+                height: 225,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 100,
+                      backgroundImage: user.fotoPerfil != null
+                          ? NetworkImage(user.fotoPerfil!) // Usa a imagem do banco de dados
+                          : AssetImage('assets/images/logoGoogle.png')
+                      as ImageProvider,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 30,
+                    Positioned(
+                      bottom: 5,
+                      right: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.blue,
+                        ),
+                        child: IconButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PerfilEditavel(user: user)),
+                            );
+                          },
+                          icon: Icon(Icons.edit, color: Colors.white, size: 30),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Container(
-            //color: Colors.green,
-            height: 400,
-            width: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 75,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Bio',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          '   vai ser vazio do padrão mas pode ser editado pelo usuario vir do BD',
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 75,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Nome Completo',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          '   Nome que vai vir do BD',
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 75,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Nome de exibição',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          '   Nome que vai vir do BD',
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
-                    ),
-                  ),
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 75,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'data de nascimento',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          'vai vir do BD',
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  Container(
-                    //color: Colors.amber,
-                    child: CupertinoButton(
+              ),
+              SizedBox(height: 15),
+              Container(
+                height: 400,
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      _buildInfoRow('Bio', user.bio ?? 'Bio não fornecida'),
+                      _buildInfoRow('Nome Completo', user.name),
+                      _buildInfoRow('Nome de exibição', user.name),
+                      _buildInfoRow('Data de nascimento',
+                          user.dataNascimento.toLocal().toString().split(' ')[0]),
+                      SizedBox(height: 40),
+                      CupertinoButton(
                         borderRadius: BorderRadius.circular(30),
                         color: Colors.blue,
                         child: Text('Alterar informações'),
                         onPressed: () {
-                          Navigator.pop(context);
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PerfilEditavel()));
-                        }),
-                  )
-                ],
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PerfilEditavel(user: user)),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
               ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Container(
+      width: double.infinity,
+      height: 75,
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            label,
+            style: TextStyle(
+              color: Color.fromARGB(255, 6, 45, 253),
+              fontSize: 20,
             ),
-          )
+          ),
+          Text(
+            '   $value',
+            style: TextStyle(fontSize: 15),
+          ),
         ],
       ),
     );

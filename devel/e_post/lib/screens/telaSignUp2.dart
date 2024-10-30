@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 
+import '../database/db_helper.dart';
+
 class TelaSignup2 extends StatefulWidget {
   const TelaSignup2({super.key});
 
@@ -17,7 +19,6 @@ class _TelaSignup2State extends State<TelaSignup2> {
   final TextEditingController completeName = TextEditingController();
   var dateInputController = MaskedTextController(mask: '00/00/0000');
   final phoneController = MaskedTextController(mask: '(00) 00000-0000');
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -220,13 +221,20 @@ class _TelaSignup2State extends State<TelaSignup2> {
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
+                        String dataformatada;
+                        List<String> datas = [];
+                        datas.addAll(dateInputController.text.split('/'));
+                        dataformatada =
+                            datas[2] + '-' + datas[1] + '-' + datas[0];
+
                         dados["name"] = completeName.text;
-                        dados["data_nascimento"] =
-                            dateInputController.text.replaceAll('/', '-');
+                        dados["data_nascimento"] = dataformatada;
                         dados["telefone"] = (phoneController.text.isNotEmpty)
                             ? phoneController.text
                             : null;
                         await submitForm();
+                        dados.clear;
+
                         Navigator.pop(context);
                         Navigator.push(
                           context,
