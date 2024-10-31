@@ -1,34 +1,61 @@
-import 'package:e_post/Screens/perfil.dart';
+import 'package:e_post/model/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PerfilEditavel extends StatefulWidget {
-  const PerfilEditavel({super.key});
+  final User user; // Recebe o objeto User
+
+  const PerfilEditavel({Key? key, required this.user}) : super(key: key);
 
   @override
   State<PerfilEditavel> createState() => _PerfilEditavelState();
 }
 
 class _PerfilEditavelState extends State<PerfilEditavel> {
+  late TextEditingController _bioController;
+  late TextEditingController _nomeCompletoController;
+  late TextEditingController _nomeExibicaoController;
+  late TextEditingController _dataNascimentoController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializa os controladores com os dados do usuário
+    _bioController = TextEditingController(text: widget.user.bio);
+    _nomeCompletoController = TextEditingController(text: widget.user.name);
+    _nomeExibicaoController = TextEditingController(text: widget.user.name);
+    _dataNascimentoController = TextEditingController(
+      text: widget.user.dataNascimento.toLocal().toString().split(' ')[0],
+    );
+  }
+
+  @override
+  void dispose() {
+    _bioController.dispose();
+    _nomeCompletoController.dispose();
+    _nomeExibicaoController.dispose();
+    _dataNascimentoController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-          SizedBox(
-            height: 50,
-          ),
+          SizedBox(height: 50),
           Container(
             alignment: Alignment.center,
-            //color: Colors.blue,
             height: 225,
             width: double.infinity,
             child: Stack(
               children: [
                 CircleAvatar(
                   radius: 100,
-                  backgroundImage: AssetImage(
-                      'assets/images/logoGoogle.png'), //tem que trocar e pegar o caminho da imagen do banco de dados e colocar aqui pra pegar a imagem no servidor
+                  backgroundImage: widget.user.fotoPerfil != null
+                      ? NetworkImage(widget.user.fotoPerfil!)
+                      : AssetImage('assets/images/logoGoogle.png')
+                  as ImageProvider,
                 ),
                 Positioned(
                   bottom: 5,
@@ -38,132 +65,62 @@ class _PerfilEditavelState extends State<PerfilEditavel> {
                       shape: BoxShape.circle,
                       color: Colors.blue,
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(0.0),
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.edit,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                      ),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.edit, color: Colors.white, size: 30),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(
-            height: 15,
-          ),
+          SizedBox(height: 15),
           Container(
-            //color: Colors.green,
             height: 350,
             width: double.infinity,
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 100,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Bio',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        TextFormField()
-                      ],
-                    ),
-                  ),
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 100,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Nome Completo',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        TextFormField()
-                      ],
-                    ),
-                  ),
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 100,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Nome de exibição',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        TextFormField()
-                      ],
-                    ),
-                  ),
-                  Container(
-                    //color: Colors.red,
-                    width: double.infinity,
-                    height: 100,
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'data de nascimento',
-                          style: TextStyle(
-                            color: Color.fromARGB(255, 6, 45, 253),
-                            fontSize: 20,
-                          ),
-                        ),
-                        Text(
-                          'vai vir do BD',
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
+                  _buildInfoRow('Bio', _bioController),
+                  _buildInfoRow('Nome Completo', _nomeCompletoController),
+                  _buildInfoRow('Nome de exibição', _nomeExibicaoController),
+                  _buildInfoRow('Data de nascimento', _dataNascimentoController),
+                  SizedBox(height: 40),
                 ],
               ),
             ),
           ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            child: CupertinoButton(
-                borderRadius: BorderRadius.circular(30),
-                color: Colors.blue,
-                child: Text('salvar informações'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Perfil()));
-                }),
+          SizedBox(height: 10),
+          CupertinoButton(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.blue,
+            child: Text('Salvar Informações'),
+            onPressed: () {
+              // Aqui você pode implementar o código para salvar as informações no banco
+              Navigator.pop(context);
+            },
           )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, TextEditingController controller) {
+    return Container(
+      width: double.infinity,
+      height: 100,
+      margin: EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            label,
+            style: TextStyle(
+              color: Color.fromARGB(255, 6, 45, 253),
+              fontSize: 20,
+            ),
+          ),
+          TextFormField(controller: controller),
         ],
       ),
     );

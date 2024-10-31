@@ -1,10 +1,14 @@
+import 'package:e_post/Screens/perfil.dart';
 import 'package:flutter/services.dart';
 import 'package:e_post/screens/configuracoes.dart';
 import 'package:e_post/screens/notificacoes.dart';
 import 'package:e_post/screens/todos_os_jogos.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:e_post/Screens/telaSignUp2.dart';
 
+import '../database/db_helper.dart';
+int? idUser = 0;
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -268,7 +272,10 @@ class _HomePageState extends State<HomePage> {
               ),
               IconButton(
                 icon: Icon(Icons.person, color: Colors.white),
-                onPressed: () => _onItemTapped(3),
+                onPressed: () async {
+                  idUser = await DBHelper.instance.getLastUserId();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil(idUser: idUser)));
+                },
               ),
             ],
           ),

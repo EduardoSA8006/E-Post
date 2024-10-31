@@ -1,6 +1,8 @@
 import 'package:e_post/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io'; // Para File e Directory
 
 class DBHelper {
   static final DBHelper instance = DBHelper._init();
@@ -19,6 +21,25 @@ class DBHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
     return await openDatabase(path, version: 1, onCreate: _createDB);
+  }
+  Future<User?> fetchUserById(int id) async {
+    final db = await instance.database;
+    final result = await db.query(
+      'users',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    // Se o resultado não estiver vazio, retorna o primeiro registro como objeto User
+    return result.isNotEmpty ? User.fromMap(result.first) : null;
+  }
+  Future<int?> getLastUserId() async {
+    final db = await instance.database;
+    final List<Map<String, dynamic>> result = await db.rawQuery('SELECT id FROM Users ORDER BY id DESC LIMIT 1');
+    print(result);
+    if (result.isNotEmpty) {
+      return result.first['id'] as int; // Retorna o ID do último usuário adicionado
+    }
+    return null; // Retorna null se não houver usuários na tabela
   }
 
   Future _createDB(Database db, int version) async {
@@ -39,7 +60,19 @@ class DBHelper {
 
   Future<int> addUser(User user) async {
     final db = await instance.database;
-    return await db.insert('users', user.toMap(),
+    return await db.insert('Users', user.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+
+  Future<User?> fetchUserByEmail(String email) async {
+    final db = await instance.database;
+    final result = await db.query(
+      'Users',
+      where: 'email = ?',
+      whereArgs: [email],
+    );
+
+    return result.isNotEmpty ? User.fromMap(result.first) : null;
   }
 }

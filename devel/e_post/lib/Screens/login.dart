@@ -3,6 +3,8 @@ import 'package:e_post/Screens/telaSignup.dart';
 import 'package:e_post/verificacoes/email.dart';
 import 'package:e_post/verificacoes/senha.dart';
 import 'package:flutter/material.dart';
+import 'package:e_post/verificacoes/autenticacaologin.dart';
+
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -14,6 +16,27 @@ class _TelaLoginState extends State<TelaLogin> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _senhaController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final AutenticacaoLogin authLogin = AutenticacaoLogin();
+  
+  void _login() async {
+    final email = _emailController.text;
+    final senha = _senhaController.text;
+
+    final isLoginSuccessful = await authLogin.login(email, senha);
+
+    if (isLoginSuccessful) {
+      Navigator.pop(context);
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => HomePage()));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Email ou senha incorretos. Tente novamente.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,9 +218,7 @@ class _TelaLoginState extends State<TelaLogin> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pop(context);
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                   _login();
                   }
                 },
               ),

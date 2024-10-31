@@ -1,4 +1,5 @@
 import 'package:e_post/Screens/functionsScreens/savedata.dart';
+import 'package:e_post/Screens/login.dart';
 import 'package:e_post/screens/telaSignUp2.dart';
 import 'package:e_post/verificacoes/email.dart';
 import 'package:flutter/material.dart';
@@ -190,12 +191,30 @@ class _TelaSignupState extends State<TelaSignup> {
                       ],
                     ),
                   ),
+
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TelaLogin()),
+                        );
+                      },
+
+                      child: Text(
+                        'Já tem uma conta? Faça login',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: Color.fromARGB(255, 55, 103, 226),
+                        ),
+                      ))
                 ],
               ),
             ),
             Container(
               color: Colors.white,
-              margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+              margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 6, 45, 253),
