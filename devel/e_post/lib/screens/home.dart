@@ -1,14 +1,11 @@
-import 'package:e_post/Screens/perfil.dart';
+import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
 import 'package:flutter/services.dart';
 import 'package:e_post/screens/configuracoes.dart';
 import 'package:e_post/screens/notificacoes.dart';
 import 'package:e_post/screens/todos_os_jogos.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:e_post/Screens/telaSignUp2.dart';
 
-import '../database/db_helper.dart';
-int? idUser = 0;
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -31,12 +28,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -51,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 23,
-                    color: Color.fromARGB(255, 11, 28, 172),
+                    color: Color.fromRGBO(11, 28, 172, 1),
                   ),
                 ),
               ),
@@ -240,45 +231,6 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          height: 70,
-          notchMargin: 10.0,
-          color: Colors.black,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              IconButton(
-                icon: Icon(Icons.home, color: Colors.white),
-                onPressed: () => _onItemTapped(0),
-              ),
-              IconButton(
-                icon: Icon(Icons.map, color: Colors.white),
-                onPressed: () => _onItemTapped(1),
-              ),
-              RawMaterialButton(
-                elevation: 2,
-                fillColor: Colors.white,
-                padding: EdgeInsets.all(11),
-                onPressed: () {},
-                shape: CircleBorder(),
-                child: Icon(
-                  Icons.add,
-                  size: 25,
-                ),
-              ),
-              IconButton(
-                icon: Icon(Icons.sports_soccer, color: Colors.white),
-                onPressed: () => _onItemTapped(2),
-              ),
-              IconButton(
-                icon: Icon(Icons.person, color: Colors.white),
-                onPressed: () async {
-                  idUser = await DBHelper.instance.getLastUserId();
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Perfil(idUser: idUser)));
-                },
-              ),
-            ],
-          ),
-        ));
+        bottomNavigationBar: barraInferior(context));
   }
 }

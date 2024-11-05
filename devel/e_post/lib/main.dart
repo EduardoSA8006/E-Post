@@ -1,14 +1,12 @@
-import 'package:e_post/Screens/perfil.dart';
-import 'package:e_post/Screens/perfileditavel.dart';
-import 'package:e_post/screens/home.dart';
-import 'package:e_post/screens/telaSignUp2.dart';
-
-import 'screens/telaSignup.dart';
+import 'package:e_post/Screens/campeonatos.dart';
+import 'package:e_post/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'Screens/login.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -32,7 +30,7 @@ class MyApp extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pt', 'BR'),
       ],
-      home: TelaLogin(),
+      home: HomePage(),
     );
   }
 }

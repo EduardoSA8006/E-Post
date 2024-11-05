@@ -111,7 +111,7 @@ class _NotoficationPageState extends State<NotoficationPage> {
                       height: 10,
                     ),
                     Expanded(
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         height: double.infinity,
                         child: NotificationWidget(
