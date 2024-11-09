@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
-import 'package:e_post/Screens/functionsScreens/jogos/exibi_jogos.dart';
+import 'package:e_post/Screens/functionsScreens/jogos/exibir_todos.dart';
+import 'package:e_post/Screens/functionsScreens/jogos/exibir_uma_modalidade.dart';
 import 'package:e_post/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,6 +25,7 @@ bool futsal = false;
 bool handball = false;
 bool volei = false;
 bool outros = false;
+bool basket = false;
 
 class _CampeonatosPageState extends State<CampeonatosPage> {
   @override
@@ -201,27 +203,152 @@ class _CampeonatosPageState extends State<CampeonatosPage> {
                   ElevatedButton(
                       style:
                           ButtonStyle(backgroundColor: corBotao(todosOsJogos)),
-                      onPressed: () {},
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = true;
+                          futebol = false;
+                          futsal = false;
+                          handball = false;
+                          volei = false;
+                          outros = false;
+                          basket = false;
+                        });
+                      },
                       child: Text(
                         "Todos os esportes",
                         style: stiloTextoBotaoAtivo(todosOsJogos),
                       )),
                   SizedBox(width: 10),
-                  ElevatedButton(onPressed: () {}, child: Text("Futebol")),
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: corBotao(futebol)),
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = false;
+                          futebol = true;
+                          futsal = false;
+                          handball = false;
+                          volei = false;
+                          outros = false;
+                          basket = false;
+                        });
+                      },
+                      child: Text(
+                        "Futebol",
+                        style: stiloTextoBotaoAtivo(futebol),
+                      )),
                   SizedBox(width: 10),
-                  ElevatedButton(onPressed: () {}, child: Text("Futsal")),
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: corBotao(futsal)),
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = false;
+                          futebol = false;
+                          futsal = true;
+                          handball = false;
+                          volei = false;
+                          outros = false;
+                          basket = false;
+                        });
+                      },
+                      child: Text(
+                        "Futsal",
+                        style: stiloTextoBotaoAtivo(futsal),
+                      )),
                   SizedBox(width: 10),
-                  ElevatedButton(onPressed: () {}, child: Text("Handball")),
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: corBotao(handball)),
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = false;
+                          futebol = false;
+                          futsal = false;
+                          handball = true;
+                          volei = false;
+                          outros = false;
+                          basket = false;
+                        });
+                      },
+                      child: Text(
+                        "Handball",
+                        style: stiloTextoBotaoAtivo(handball),
+                      )),
                   SizedBox(width: 10),
-                  ElevatedButton(onPressed: () {}, child: Text("Volleyball")),
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: corBotao(volei)),
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = false;
+                          futebol = false;
+                          futsal = false;
+                          handball = false;
+                          volei = true;
+                          outros = false;
+                          basket = false;
+                        });
+                      },
+                      child: Text(
+                        "Volleyball",
+                        style: stiloTextoBotaoAtivo(volei),
+                      )),
                   SizedBox(width: 10),
-                  ElevatedButton(onPressed: () {}, child: Text("Outros")),
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: corBotao(basket)),
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = false;
+                          futebol = false;
+                          futsal = false;
+                          handball = false;
+                          volei = false;
+                          outros = false;
+                          basket = true;
+                        });
+                      },
+                      child: Text(
+                        "Basketball",
+                        style: stiloTextoBotaoAtivo(basket),
+                      )),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  ElevatedButton(
+                      style: ButtonStyle(backgroundColor: corBotao(outros)),
+                      onPressed: () {
+                        setState(() {
+                          todosOsJogos = false;
+                          futebol = false;
+                          futsal = false;
+                          handball = false;
+                          volei = false;
+                          outros = true;
+                          basket = false;
+                        });
+                      },
+                      child: Text(
+                        "Outros",
+                        style: stiloTextoBotaoAtivo(outros),
+                      )),
                 ],
               ),
             ),
             Expanded(
-              child: todos(notificacoes, atualizaPagina),
-            ),
+                child: todosOsJogos
+                    ? todos(notificacoes, atualizaPagina)
+                    : futebol
+                        ? mostraUmaModalidade("Futebol", atualizaPagina)
+                        : futsal
+                            ? mostraUmaModalidade("Futsal", atualizaPagina)
+                            : volei
+                                ? mostraUmaModalidade(
+                                    "Volleyball", atualizaPagina)
+                                : basket
+                                    ? mostraUmaModalidade(
+                                        "Basketball", atualizaPagina)
+                                    : handball
+                                        ? mostraUmaModalidade(
+                                            "Handball", atualizaPagina)
+                                        : mostraUmaModalidade(
+                                            "Outros", atualizaPagina))
           ],
         ),
       ),
