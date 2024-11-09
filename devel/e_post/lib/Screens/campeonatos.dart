@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
+import 'package:e_post/Screens/functionsScreens/jogos/exibi_jogos.dart';
+import 'package:e_post/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rxdart/rxdart.dart';
 
 class CampeonatosPage extends StatefulWidget {
   const CampeonatosPage({super.key});
@@ -15,11 +18,42 @@ bool partidas = true;
 bool amistosos = false;
 bool competicoes = false;
 
+bool todosOsJogos = true;
+bool futebol = false;
+bool futsal = false;
+bool handball = false;
+bool volei = false;
+bool outros = false;
+
 class _CampeonatosPageState extends State<CampeonatosPage> {
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  List<bool> notificacoes = [];
+
+  void atualizaPagina() {
+    setState(() {});
+  }
+
+  TextStyle stiloTextoBotaoAtivo(modalidade) {
+    if (modalidade) {
+      return GoogleFonts.inter(
+          color: Colors.white, fontWeight: FontWeight.w400, fontSize: 16);
+    } else {
+      return GoogleFonts.inter(
+          color: Colors.black, fontWeight: FontWeight.w400, fontSize: 16);
+    }
+  }
+
+  MaterialStateProperty<Color?>? corBotao(modalidade) {
+    if (modalidade) {
+      return WidgetStatePropertyAll(Color.fromARGB(255, 0, 111, 237));
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -29,21 +63,35 @@ class _CampeonatosPageState extends State<CampeonatosPage> {
           preferredSize: Size.fromHeight(100),
           child: AppBar(
             backgroundColor: const Color.fromARGB(255, 6, 43, 253),
-            title: Row(
-              children: [
-                Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.white,
-                ),
-                Text(
-                  "Voltar",
-                  style: GoogleFonts.inter(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
-                )
-              ],
+            title: InkWell(
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "Voltar",
+                    style: GoogleFonts.inter(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600),
+                  )
+                ],
+              ),
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              },
             ),
+            actions: [
+              IconButton(
+                  onPressed: atualizaPagina,
+                  icon: Icon(
+                    Icons.refresh,
+                    color: Colors.white,
+                  ))
+            ],
             bottom: PreferredSize(
                 preferredSize: Size.fromHeight(10),
                 child: Padding(
@@ -140,24 +188,42 @@ class _CampeonatosPageState extends State<CampeonatosPage> {
                   ),
                 )),
           )),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('jsonData').snapshots(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
-          }
-
-          return ListView(
-            children: snapshot.data!.docs.map((doc) {
-              Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-              return ListTile(
-                title: Text(data['title'] ?? 'No Title'),
-                subtitle: Text(
-                    data['content'].toString()), // Exibe o JSON como string
-              );
-            }).toList(),
-          );
-        },
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        child: Column(
+          children: [
+            SizedBox(height: 5),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ElevatedButton(
+                      style:
+                          ButtonStyle(backgroundColor: corBotao(todosOsJogos)),
+                      onPressed: () {},
+                      child: Text(
+                        "Todos os esportes",
+                        style: stiloTextoBotaoAtivo(todosOsJogos),
+                      )),
+                  SizedBox(width: 10),
+                  ElevatedButton(onPressed: () {}, child: Text("Futebol")),
+                  SizedBox(width: 10),
+                  ElevatedButton(onPressed: () {}, child: Text("Futsal")),
+                  SizedBox(width: 10),
+                  ElevatedButton(onPressed: () {}, child: Text("Handball")),
+                  SizedBox(width: 10),
+                  ElevatedButton(onPressed: () {}, child: Text("Volleyball")),
+                  SizedBox(width: 10),
+                  ElevatedButton(onPressed: () {}, child: Text("Outros")),
+                ],
+              ),
+            ),
+            Expanded(
+              child: todos(notificacoes, atualizaPagina),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: barraInferior(context),
     );
