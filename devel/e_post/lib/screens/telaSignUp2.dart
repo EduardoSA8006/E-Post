@@ -4,9 +4,7 @@ import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-
 import '../database/db_helper.dart';
-
 class TelaSignup2 extends StatefulWidget {
   const TelaSignup2({super.key});
 
@@ -231,7 +229,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                         dados["data_nascimento"] = dataformatada;
                         dados["telefone"] = (phoneController.text.isNotEmpty)
                             ? phoneController.text
-                            : null;
+                            : false;
                         await submitForm();
                         dados.clear;
 

@@ -8,6 +8,7 @@ Future<void> submitForm() async {
       name: dados['name'],
       email: dados['email'],
       senha: dados['senha'],
+      telefone: dados['telefone'] != false ? dados['telefone'] : '',
       dataNascimento: DateTime.parse(dados['data_nascimento']));
 
   await DBHelper.instance.addUser(user);
