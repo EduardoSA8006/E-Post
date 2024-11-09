@@ -7,6 +7,8 @@ import 'package:e_post/verificacoes/autenticacaologin.dart';
 
 
 class TelaLogin extends StatefulWidget {
+  const TelaLogin({super.key});
+
   @override
   _TelaLoginState createState() => _TelaLoginState();
 }

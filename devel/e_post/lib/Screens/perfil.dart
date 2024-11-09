@@ -1,3 +1,5 @@
+import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
+import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/perfileditavel.dart';
 import 'package:e_post/database/db_helper.dart';
 import 'package:e_post/model/user.dart';
@@ -5,11 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:e_post/Screens/telaSignUp2.dart';
 import 'package:e_post/Screens/home.dart';
+import 'package:flutter/services.dart';
 
 class Perfil extends StatefulWidget {
   final int? idUser; // Recebe o ID do usuário logado
 
-  const Perfil({Key? key, required this.idUser}) : super(key: key);
+  const Perfil({super.key, required this.idUser});
 
   @override
   State<Perfil> createState() => _PerfilState();
@@ -21,6 +24,7 @@ class _PerfilState extends State<Perfil> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     userFuture = DBHelper.instance.fetchUserById(idUser!);
   }
 
@@ -80,7 +84,7 @@ class _PerfilState extends State<Perfil> {
                 ),
               ),
               SizedBox(height: 15),
-              Container(
+              SizedBox(
                 height: 400,
                 width: double.infinity,
                 child: SingleChildScrollView(
@@ -112,6 +116,7 @@ class _PerfilState extends State<Perfil> {
           );
         },
       ),
+      bottomNavigationBar: barraInferior(context)
     );
   }
 

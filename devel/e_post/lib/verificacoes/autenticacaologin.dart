@@ -1,5 +1,4 @@
 import 'package:e_post/database/db_helper.dart';
-import 'package:e_post/model/user.dart';
 
 class AutenticacaoLogin{
   Future<bool> login(String email, String senha) async {

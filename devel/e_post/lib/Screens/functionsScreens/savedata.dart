@@ -2,6 +2,7 @@ import 'package:e_post/database/db_helper.dart';
 import 'package:e_post/model/user.dart';
 
 Map<String, dynamic> dados = {};
+int? idUser = 0;
 
 Future<void> submitForm() async {
   final user = User(

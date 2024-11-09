@@ -223,7 +223,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                         List<String> datas = [];
                         datas.addAll(dateInputController.text.split('/'));
                         dataformatada =
-                            datas[2] + '-' + datas[1] + '-' + datas[0];
+                            '${datas[2]}-${datas[1]}-${datas[0]}';
 
                         dados["name"] = completeName.text;
                         dados["data_nascimento"] = dataformatada;

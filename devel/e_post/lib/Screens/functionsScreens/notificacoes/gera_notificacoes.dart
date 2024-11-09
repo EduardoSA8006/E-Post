@@ -9,8 +9,8 @@ List<Map<String, dynamic>> notificacoes = [
 
 bool selecionando = false;
 bool permitirSelecao = false;
-Set<int> notificacoesSelecionadas = Set<int>();
-Set<int> notificacoesLidas = Set<int>();
+Set<int> notificacoesSelecionadas = <int>{};
+Set<int> notificacoesLidas = <int>{};
 bool selecionandoTodos = false;
 
 void adicionaSelecao(int a) {
@@ -29,7 +29,7 @@ void deletarNotificacoesSelecionadas() {
 class NotificationWidget extends StatelessWidget {
   final Function atualizarPagina;
 
-  NotificationWidget({
+  const NotificationWidget({super.key, 
     required this.atualizarPagina,
   });
 

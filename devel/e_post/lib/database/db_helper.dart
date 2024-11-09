@@ -1,8 +1,6 @@
 import 'package:e_post/model/user.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io'; // Para File e Directory
 
 class DBHelper {
   static final DBHelper instance = DBHelper._init();

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class PerfilEditavel extends StatefulWidget {
   final User user; // Recebe o objeto User
 
-  const PerfilEditavel({Key? key, required this.user}) : super(key: key);
+  const PerfilEditavel({super.key, required this.user});
 
   @override
   State<PerfilEditavel> createState() => _PerfilEditavelState();
@@ -75,7 +75,7 @@ class _PerfilEditavelState extends State<PerfilEditavel> {
             ),
           ),
           SizedBox(height: 15),
-          Container(
+          SizedBox(
             height: 350,
             width: double.infinity,
             child: SingleChildScrollView(
