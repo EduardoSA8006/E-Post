@@ -15,8 +15,8 @@ class TelaSignup extends StatefulWidget {
 
 class _TelaSignupState extends State<TelaSignup> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _senhaController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
   final TextEditingController _confirmaSenhaController =
       TextEditingController();
   bool _mostrarSenha1 = false;
@@ -99,7 +99,7 @@ class _TelaSignupState extends State<TelaSignup> {
                     child: Column(
                       children: [
                         TextFormField(
-                          controller: _emailController,
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           validator: validarEmail,
                           decoration: InputDecoration(
@@ -120,7 +120,7 @@ class _TelaSignupState extends State<TelaSignup> {
                           height: 10,
                         ),
                         TextFormField(
-                          controller: _senhaController,
+                          controller: senhaController,
                           validator: validarSenha,
                           decoration: InputDecoration(
                             filled: true,
@@ -158,7 +158,7 @@ class _TelaSignupState extends State<TelaSignup> {
                           controller: _confirmaSenhaController,
                           validator: (value) {
                             return verificaConfirmeSenha(
-                                value, _senhaController.text);
+                                value, senhaController.text);
                           },
                           decoration: InputDecoration(
                             filled: true,
@@ -235,8 +235,8 @@ class _TelaSignupState extends State<TelaSignup> {
                 ),
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    dados["email"] = _emailController.text;
-                    dados["senha"] = _senhaController.text;
+                    dados["email"] = emailController.text;
+                    dados["senha"] = senhaController.text;
                     Navigator.pop(context);
                     Navigator.push(
                       context,
