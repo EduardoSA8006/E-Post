@@ -1,11 +1,8 @@
 import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/home.dart';
-import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-
-import '../database/db_helper.dart';
 
 class TelaSignup2 extends StatefulWidget {
   const TelaSignup2({super.key});
@@ -50,7 +47,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                     Padding(
                       padding: const EdgeInsets.only(right: 16.0, top: 50),
                       child: Image.asset(
-                        "assets/images/icon.png",
+                        "assets/images/icone.png",
                         height: 55,
                       ),
                     ),
@@ -224,8 +221,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                         String dataformatada;
                         List<String> datas = [];
                         datas.addAll(dateInputController.text.split('/'));
-                        dataformatada =
-                            '${datas[2]}-${datas[1]}-${datas[0]}';
+                        dataformatada = '${datas[2]}-${datas[1]}-${datas[0]}';
 
                         dados["name"] = completeName.text;
                         dados["data_nascimento"] = dataformatada;

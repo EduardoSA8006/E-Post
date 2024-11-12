@@ -1,11 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_post/Screens/campeonatos.dart';
+import 'package:e_post/Screens/criar_campeonatos.dart';
 import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/home.dart';
 import 'package:e_post/Screens/perfil.dart';
 import 'package:e_post/Screens/tela_mapa.dart';
 import 'package:e_post/database/db_helper.dart';
-import 'package:e_post/json/enviaParaOServer.dart';
 import 'package:flutter/material.dart';
 
 BottomAppBar barraInferior(context) {
@@ -35,38 +34,8 @@ BottomAppBar barraInferior(context) {
           fillColor: Colors.white,
           padding: EdgeInsets.all(11),
           onPressed: () {
-            addJogos({
-              "modalidade": "Futebol",
-              'data_campeonato': Timestamp.fromDate(DateTime(2025, 11, 1)),
-              'horarioCampeonato': '11:30',
-              'nome_campeonato': 'barSemLona',
-              'localizacao': 'rua sem fundo',
-              'times': ["Perdedores", "Vencedores"]
-            }, "Futebol");
-            addJogos({
-              "modalidade": "Volleyball",
-              'data_campeonato': Timestamp.fromDate(DateTime(2025, 11, 1)),
-              'horarioCampeonato': '11:30',
-              'nome_campeonato': 'barSemLona',
-              'localizacao': 'rua sem fundo',
-              'times': ["Figurantes", "Gabbs"]
-            }, "Volleyball");
-            addJogos({
-              "modalidade": "Handball",
-              'data_campeonato': Timestamp.fromDate(DateTime(2025, 11, 1)),
-              'horarioCampeonato': '11:30',
-              'nome_campeonato': 'barSemLona',
-              'localizacao': 'rua sem fundo',
-              'times': ["Bar sem lona", "viemos Jogar"]
-            }, "Handball");
-            addJogos({
-              "modalidade": "Handball",
-              'data_campeonato': Timestamp.fromDate(DateTime(2025, 11, 1)),
-              'horarioCampeonato': '11:30',
-              'nome_campeonato': 'barSemLona',
-              'localizacao': 'rua sem fundo',
-              'times': ["Bar sem lona", "viemos Jogar"]
-            }, "Handball");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => CriaCampeonatosPage()));
           },
           shape: CircleBorder(),
           child: Icon(

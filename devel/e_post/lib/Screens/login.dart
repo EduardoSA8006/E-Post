@@ -71,7 +71,7 @@ class _TelaLoginState extends State<TelaLogin> {
                     Padding(
                       padding: EdgeInsets.only(right: 16.0),
                       child: Image.asset(
-                        "assets/images/icon.png",
+                        "assets/images/icone.png",
                         height: 55,
                       ),
                     ),

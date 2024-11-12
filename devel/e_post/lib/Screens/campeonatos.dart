@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
 import 'package:e_post/Screens/functionsScreens/jogos/exibir_todos.dart';
 import 'package:e_post/Screens/functionsScreens/jogos/exibir_uma_modalidade.dart';
@@ -6,7 +5,6 @@ import 'package:e_post/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rxdart/rxdart.dart';
 
 class CampeonatosPage extends StatefulWidget {
   const CampeonatosPage({super.key});

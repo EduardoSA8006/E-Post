@@ -53,7 +53,7 @@ class _TelaSignupState extends State<TelaSignup> {
                     Padding(
                       padding: const EdgeInsets.only(right: 16.0),
                       child: Image.asset(
-                        "assets/images/icon.png",
+                        "assets/images/icone.png",
                         height: 55,
                       ),
                     ),
@@ -191,17 +191,14 @@ class _TelaSignupState extends State<TelaSignup> {
                       ],
                     ),
                   ),
-
                   TextButton(
                       onPressed: () {
                         Navigator.pop(context);
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => TelaLogin()),
+                          MaterialPageRoute(builder: (context) => TelaLogin()),
                         );
                       },
-
                       child: Text(
                         'Já tem uma conta? Faça login',
                         style: TextStyle(
