@@ -1,10 +1,11 @@
-import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/login.dart';
-import 'package:e_post/screens/telaSignUp2.dart';
+import 'package:e_post/Screens/telaSignUp2.dart';
 import 'package:e_post/verificacoes/email.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:e_post/verificacoes/senha.dart';
+import 'package:e_post/verificacoes/autenticacaoServer.dart';
+
 
 class TelaSignup extends StatefulWidget {
   const TelaSignup({super.key});
@@ -15,12 +16,14 @@ class TelaSignup extends StatefulWidget {
 
 class _TelaSignupState extends State<TelaSignup> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _senhaController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController senhaController = TextEditingController();
   final TextEditingController _confirmaSenhaController =
       TextEditingController();
   bool _mostrarSenha1 = false;
   bool _mostrarSenha = false;
+
+  AutenticacaoServer _autServer = AutenticacaoServer();
 
   @override
   Widget build(BuildContext context) {
@@ -99,7 +102,7 @@ class _TelaSignupState extends State<TelaSignup> {
                     child: Column(
                       children: [
                         TextFormField(
-                          controller: _emailController,
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           validator: validarEmail,
                           decoration: InputDecoration(
@@ -120,7 +123,7 @@ class _TelaSignupState extends State<TelaSignup> {
                           height: 10,
                         ),
                         TextFormField(
-                          controller: _senhaController,
+                          controller: senhaController,
                           validator: validarSenha,
                           decoration: InputDecoration(
                             filled: true,
@@ -158,7 +161,7 @@ class _TelaSignupState extends State<TelaSignup> {
                           controller: _confirmaSenhaController,
                           validator: (value) {
                             return verificaConfirmeSenha(
-                                value, _senhaController.text);
+                                value, senhaController.text);
                           },
                           decoration: InputDecoration(
                             filled: true,
@@ -230,16 +233,25 @@ class _TelaSignupState extends State<TelaSignup> {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    dados["email"] = _emailController.text;
-                    dados["senha"] = _senhaController.text;
-                    Navigator.pop(context);
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const TelaSignup2()),
-                    );
+                    bool accountExists = await _autServer.checkIfAccountExists(emailController.text);
+                    if (accountExists){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Já existe um usúario com esse email')),
+                      );
+                      emailController.clear();
+                    }else {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => TelaSignup2(
+                              emailController: emailController.text,
+                              senhaController: senhaController.text,
+                            )),
+                      );
+                    }
+
                   }
                 },
               ),

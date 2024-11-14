@@ -1,4 +1,7 @@
 import 'package:e_post/Screens/home.dart';
+import 'package:e_post/Screens/login.dart';
+import 'package:e_post/Screens/telaSignup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +11,9 @@ void main() async {
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
+String? userUid = FirebaseAuth.instance.currentUser?.uid;
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -29,7 +35,7 @@ class MyApp extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pt', 'BR'),
       ],
-      home: HomePage(),
+      home: TelaLogin(),
     );
   }
 }

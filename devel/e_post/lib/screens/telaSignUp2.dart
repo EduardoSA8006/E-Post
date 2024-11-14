@@ -1,21 +1,27 @@
-import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
+import 'package:e_post/verificacoes/autenticacaoServer.dart';
+import 'package:e_post/main.dart';
 
 class TelaSignup2 extends StatefulWidget {
-  const TelaSignup2({super.key});
+  final String emailController;
+  final String senhaController;
+
+  const TelaSignup2({super.key, required this.emailController, required this.senhaController});
 
   @override
   _TelaSignup2State createState() => _TelaSignup2State();
 }
-
 class _TelaSignup2State extends State<TelaSignup2> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController completeName = TextEditingController();
   var dateInputController = MaskedTextController(mask: '00/00/0000');
   final phoneController = MaskedTextController(mask: '(00) 00000-0000');
+
+  AutenticacaoServer _autServer = AutenticacaoServer();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,29 +222,28 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       'Finalizar',
                       style: TextStyle(fontSize: 18, color: Colors.white),
                     ),
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        String dataformatada;
-                        List<String> datas = [];
-                        datas.addAll(dateInputController.text.split('/'));
-                        dataformatada = '${datas[2]}-${datas[1]}-${datas[0]}';
-
-                        dados["name"] = completeName.text;
-                        dados["data_nascimento"] = dataformatada;
-                        dados["telefone"] = (phoneController.text.isNotEmpty)
-                            ? phoneController.text
-                            : null;
-                        await submitForm();
-                        dados.clear;
-
-                        Navigator.pop(context);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomePage()),
-                        );
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          List<String> datas = dateInputController.text.split('/');
+                          DateTime dataNascimento = DateTime(
+                            int.parse(datas[2]),
+                            int.parse(datas[1]),
+                            int.parse(datas[0]),
+                          );
+                          _autServer.cadastrarUsuario(email: widget.emailController, senha: widget.senhaController, context: context);
+                          _autServer.salvarNome(nome: completeName.text, userId: userUid );
+                          _autServer.saveUserDateOfBirth(userId: userUid, dateOfBirth: dataNascimento);
+                          _autServer.salvarNumero(telefone:
+                          (phoneController.text.isNotEmpty) ? phoneController.text : '',
+                              userId: userUid);
+                          Navigator.pop(context);
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => const HomePage()),
+                          );
+                        }
                       }
-                    },
+
                   ),
                   const SizedBox(
                     height: 20,

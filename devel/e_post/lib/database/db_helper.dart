@@ -48,7 +48,7 @@ class DBHelper {
       email VARCHAR(255) NOT NULL,
       senha VARCHAR(16) NOT NULL,
       data_nascimento DATETIME NOT NULL,
-      data_criacao DATETIME DEFAULT CURRENT_TIMESTAMP,
+      data_criacao text default current_timestamp,
       telefone VARCHAR(15) NULL,
       foto_perfil VARCHAR(255) NULL,
       bio VARCHAR(255) null
