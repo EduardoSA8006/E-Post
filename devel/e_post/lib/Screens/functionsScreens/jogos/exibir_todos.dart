@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_post/Screens/functionsScreens/notificacoes/gera_notificacoes.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 

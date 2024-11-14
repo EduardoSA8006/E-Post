@@ -1,11 +1,9 @@
 import 'package:e_post/Screens/home.dart';
-import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:e_post/verificacoes/autenticacaoServer.dart';
 import 'package:e_post/main.dart';
-
 
 class TelaSignup2 extends StatefulWidget {
   final String emailController;
@@ -55,7 +53,7 @@ class _TelaSignup2State extends State<TelaSignup2> {
                     Padding(
                       padding: const EdgeInsets.only(right: 16.0, top: 50),
                       child: Image.asset(
-                        "assets/images/icon.png",
+                        "assets/images/icone.png",
                         height: 55,
                       ),
                     ),
