@@ -1,19 +1,21 @@
-import 'package:e_post/Screens/functionsScreens/savedata.dart';
 import 'package:e_post/Screens/home.dart';
 import 'package:e_post/screens/telaSignup.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
-import '../database/db_helper.dart';
 import 'package:e_post/verificacoes/autenticacaoServer.dart';
+import 'package:e_post/main.dart';
+
 
 class TelaSignup2 extends StatefulWidget {
-  const TelaSignup2({super.key});
+  final String emailController;
+  final String senhaController;
+
+  const TelaSignup2({super.key, required this.emailController, required this.senhaController});
 
   @override
   _TelaSignup2State createState() => _TelaSignup2State();
 }
-
 class _TelaSignup2State extends State<TelaSignup2> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController completeName = TextEditingController();
@@ -230,15 +232,13 @@ class _TelaSignup2State extends State<TelaSignup2> {
                             int.parse(datas[1]),
                             int.parse(datas[0]),
                           );
-
-                          await _autServer.cadastrarUsuario(
-                            nome: completeName.text,
-                            email: dados['email'],
-                            senha: dados['senha'],
-                            telefone: phoneController.text.isNotEmpty ? phoneController.text : null,
-                            dataNascimento: dataNascimento,
-                          );
-
+                          _autServer.cadastrarUsuario(email: widget.emailController, senha: widget.senhaController, context: context);
+                          _autServer.salvarNome(nome: completeName.text, userId: userUid );
+                          _autServer.saveUserDateOfBirth(userId: userUid, dateOfBirth: dataNascimento);
+                          _autServer.salvarNumero(telefone:
+                          (phoneController.text.isNotEmpty) ? phoneController.text : '',
+                              userId: userUid);
+                          Navigator.pop(context);
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(builder: (context) => const HomePage()),
