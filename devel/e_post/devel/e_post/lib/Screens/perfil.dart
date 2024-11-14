@@ -5,8 +5,6 @@ import 'package:e_post/database/db_helper.dart';
 import 'package:e_post/model/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:e_post/Screens/telaSignUp2.dart';
-import 'package:e_post/Screens/home.dart';
 import 'package:flutter/services.dart';
 
 class Perfil extends StatefulWidget {

@@ -48,7 +48,7 @@ class _CampeonatosPageState extends State<CampeonatosPage> {
     }
   }
 
-  MaterialStateProperty<Color?>? corBotao(modalidade) {
+  WidgetStateProperty<Color?>? corBotao(modalidade) {
     if (modalidade) {
       return WidgetStatePropertyAll(Color.fromARGB(255, 0, 111, 237));
     } else {

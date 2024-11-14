@@ -1,11 +1,7 @@
-import 'package:e_post/Screens/campeonatos.dart';
 import 'package:e_post/Screens/home.dart';
-import 'package:e_post/Screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:path/path.dart';
-import 'package:google_api_availability/google_api_availability.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
