@@ -82,7 +82,6 @@ class _MapPageState extends State<MapPage> {
                 ),
               ],
             ),
-      bottomNavigationBar: barraInferior(context),
     );
   }
 }
