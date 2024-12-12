@@ -1,4 +1,4 @@
-import 'package:e_post/Screens/home.dart';
+import 'package:e_post/Screens/defalt.dart';
 import 'package:e_post/Screens/login.dart';
 import 'package:e_post/Screens/telaSignup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         Locale('en', 'US'),
         Locale('pt', 'BR'),
       ],
-      home: TelaLogin(),
+      home: DefaltPage(),
     );
   }
 }
