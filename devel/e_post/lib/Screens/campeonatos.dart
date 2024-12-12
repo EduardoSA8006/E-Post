@@ -1,7 +1,7 @@
 import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
 import 'package:e_post/Screens/functionsScreens/jogos/exibir_todos.dart';
 import 'package:e_post/Screens/functionsScreens/jogos/exibir_uma_modalidade.dart';
-import 'package:e_post/Screens/home.dart';
+import 'package:e_post/Screens/defalt.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,27 +63,7 @@ class _CampeonatosPageState extends State<CampeonatosPage> {
           preferredSize: Size.fromHeight(100),
           child: AppBar(
             backgroundColor: const Color.fromARGB(255, 6, 43, 253),
-            title: InkWell(
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    "Voltar",
-                    style: GoogleFonts.inter(
-                        fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  )
-                ],
-              ),
-              onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
-              },
-            ),
+            title: Text("Campeonatos"),
             actions: [
               IconButton(
                   onPressed: atualizaPagina,

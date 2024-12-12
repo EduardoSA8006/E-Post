@@ -1,4 +1,4 @@
-import 'package:e_post/Screens/home.dart';
+import 'package:e_post/Screens/defalt.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
@@ -9,11 +9,15 @@ class TelaSignup2 extends StatefulWidget {
   final String emailController;
   final String senhaController;
 
-  const TelaSignup2({super.key, required this.emailController, required this.senhaController});
+  const TelaSignup2(
+      {super.key,
+      required this.emailController,
+      required this.senhaController});
 
   @override
   _TelaSignup2State createState() => _TelaSignup2State();
 }
+
 class _TelaSignup2State extends State<TelaSignup2> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController completeName = TextEditingController();
@@ -208,43 +212,50 @@ class _TelaSignup2State extends State<TelaSignup2> {
                       )),
                   const SizedBox(height: 25),
                   ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 6, 45, 253),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 6, 45, 253),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 12,
+                          horizontal: 100,
+                        ),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 12,
-                        horizontal: 100,
+                      child: const Text(
+                        'Finalizar',
+                        style: TextStyle(fontSize: 18, color: Colors.white),
                       ),
-                    ),
-                    child: const Text(
-                      'Finalizar',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          List<String> datas = dateInputController.text.split('/');
+                          List<String> datas =
+                              dateInputController.text.split('/');
                           DateTime dataNascimento = DateTime(
                             int.parse(datas[2]),
                             int.parse(datas[1]),
                             int.parse(datas[0]),
                           );
-                          _autServer.cadastrarUsuario(email: widget.emailController, senha: widget.senhaController, context: context);
-                          _autServer.salvarNome(nome: completeName.text, userId: userUid );
-                          _autServer.saveUserDateOfBirth(userId: userUid, dateOfBirth: dataNascimento);
-                          _autServer.salvarNumero(telefone:
-                          (phoneController.text.isNotEmpty) ? phoneController.text : '',
+                          _autServer.cadastrarUsuario(
+                              email: widget.emailController,
+                              senha: widget.senhaController,
+                              context: context);
+                          _autServer.salvarNome(
+                              nome: completeName.text, userId: userUid);
+                          _autServer.saveUserDateOfBirth(
+                              userId: userUid, dateOfBirth: dataNascimento);
+                          _autServer.salvarNumero(
+                              telefone: (phoneController.text.isNotEmpty)
+                                  ? phoneController.text
+                                  : '',
                               userId: userUid);
                           Navigator.pop(context);
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => const HomePage()),
+                            MaterialPageRoute(
+                                builder: (context) => const DefaltPage()),
                           );
                         }
-                      }
-
-                  ),
+                      }),
                   const SizedBox(
                     height: 20,
                   ),

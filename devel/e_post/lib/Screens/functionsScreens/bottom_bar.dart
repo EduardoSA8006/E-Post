@@ -1,7 +1,6 @@
 import 'package:e_post/Screens/campeonatos.dart';
 import 'package:e_post/Screens/criar_campeonatos.dart';
 import 'package:e_post/Screens/functionsScreens/savedata.dart';
-import 'package:e_post/Screens/home.dart';
 import 'package:e_post/Screens/perfil.dart';
 import 'package:e_post/Screens/tela_mapa.dart';
 import 'package:e_post/database/db_helper.dart';
@@ -17,10 +16,7 @@ BottomAppBar barraInferior(context) {
       children: <Widget>[
         IconButton(
           icon: Icon(Icons.home, color: Colors.white),
-          onPressed: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
-          },
+          onPressed: () {},
         ),
         IconButton(
           icon: Icon(Icons.map, color: Colors.white),

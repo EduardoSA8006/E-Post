@@ -1,4 +1,4 @@
-import 'package:e_post/Screens/home.dart';
+import 'package:e_post/Screens/defalt.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:e_post/Screens/telaSignup.dart';
@@ -33,7 +33,7 @@ class _TelaLoginState extends State<TelaLogin> {
         if (user != null) {
           // Navegar para a próxima tela, ex: tela principal
           Navigator.pushReplacement(context, MaterialPageRoute(
-              builder: (context) => HomePage()));
+              builder: (context) => DefaltPage()));
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -75,7 +75,7 @@ class _TelaLoginState extends State<TelaLogin> {
                       Padding(
                         padding: EdgeInsets.only(right: 16.0),
                         child: Image.asset(
-                          "assets/images/icon.png",
+                          "assets/images/icone.png",
                           height: 55,
                         ),
                       ),
