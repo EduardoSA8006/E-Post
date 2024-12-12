@@ -1,4 +1,10 @@
+import 'package:e_post/Screens/bottomBarTelas/home.dart';
+import 'package:e_post/Screens/campeonatos.dart';
+import 'package:e_post/Screens/criar_campeonatos.dart';
 import 'package:e_post/Screens/functionsScreens/bottom_bar.dart';
+import 'package:e_post/Screens/functionsScreens/savedata.dart';
+import 'package:e_post/Screens/perfil.dart';
+import 'package:e_post/Screens/tela_mapa.dart';
 import 'package:flutter/services.dart';
 import 'package:e_post/screens/configuracoes.dart';
 import 'package:e_post/screens/notificacoes.dart';
@@ -25,18 +31,17 @@ class _DefaltPageState extends State<DefaltPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-    
-    
+
     final List<Widget> widgetOptions = [
-      Scaffold(
-        backgroundColor: Colors.grey[300],
-        body: (),
-      ),
-      
+      HomePage(),
+      MapPage(),
+      CriaCampeonatosPage(),
+      CampeonatosPage(),
+      Perfil(idUser: idUser),
     ];
 
     return Scaffold(
-      body: widgetOptions.elementAt(tela),,
+        body: widgetOptions.elementAt(tela),
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.black,
           currentIndex: tela,
